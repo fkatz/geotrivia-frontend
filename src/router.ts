@@ -5,6 +5,7 @@ import POIs from './views/POIs.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Users from './views/Users.vue'
+import UserModule from './UserModule'
 
 Vue.use(Router)
 var router = new Router({
@@ -51,7 +52,7 @@ var router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && localStorage.getItem("jwt") == null) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !UserModule.logged) {
     next({
       path: '/login',
     })

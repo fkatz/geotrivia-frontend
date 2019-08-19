@@ -18,6 +18,8 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import User from "../entities/User";
+import UserModule from "../UserModule"
+
 @Component({
   components: {}
 })
@@ -36,8 +38,7 @@ export default class Users extends Vue {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJma2F0eiJ9.GEFFTyZcHGQhW0SIyJQ4m-Wi1LCqyM-aRbQOhiXq4Q4ajUP2qjB0eiN5Do32Z7HyHe8TlrLi0mD5bDKIAOVuiA"
+          Authorization: UserModule.token
         }
       });
       let obj = await res.json();

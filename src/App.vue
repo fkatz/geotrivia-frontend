@@ -1,17 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link v-if="logged" to="/pois">POIs</router-link>
-      <router-link v-if="logged" to="/users">Users</router-link>
-      <router-link v-if="logged" to="#" @click.native.prevent="logout()">Cerrar Sesión</router-link>
-      <router-link v-if="!logged" to="/login">Iniciar Sesión</router-link>
-      <router-link v-if="!logged" to="/register">Registrarse</router-link>
-    </div>
-    <router-view />
-  </div>
+<div id="app">
+  <Navbar id="nav"/>
+      <router-view/>
+      </div>
 </template>
 
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+import UserModule from "./UserModule";
+import Navbar from "./components/Navbar.vue"
+
+@Component({
+  components: {
+    Navbar
+  }
+})
+export default class App extends Vue {
+  private drawerVisible: boolean = false;
+  get logged(): boolean {
+    return UserModule.logged;
+  }
+  logout(): void {
+    UserModule.logout();
+    if (this.$router.currentRoute.name == "home") {
+      this.$router.go(0);
+    } else {
+      this.$router.push("/home");
+    }
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -32,20 +50,3 @@
   }
 }
 </style>
-<script lang="ts">
-import { Vue } from "vue-property-decorator";
-import POI from "./entities/POI";
-export default class App extends Vue {
-  get logged(): boolean {
-    return localStorage.getItem("jwt") != null;
-  }
-  logout(): void {
-    localStorage.removeItem("jwt");
-    if (this.$router.currentRoute.name == "home") {
-      this.$router.go(0);
-    } else {
-      this.$router.push("/home");
-    }
-  }
-}
-</script>

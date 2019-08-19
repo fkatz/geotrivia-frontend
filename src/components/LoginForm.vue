@@ -21,6 +21,8 @@
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
 import User from "../entities/User";
+import UserModule from "../UserModule"
+
 @Component({
   components: {}
 })
@@ -41,7 +43,7 @@ export default class LoginForm extends Vue {
     ) {
       try {
         let user = new User(this.username, this.password);
-        let res = await fetch("/api/auth", {
+        let res = await fetch("/api/users/auth", {
           method: "POST",
           body: JSON.stringify(user),
           headers: {
@@ -50,7 +52,7 @@ export default class LoginForm extends Vue {
         });
         if(res.ok){
         let jwt: string = await res.text();
-        localStorage.setItem("jwt",jwt);
+        UserModule.token = jwt;
         if(this.$router.currentRoute.name=="home"){
           this.$router.go(0);
         }
