@@ -59,7 +59,7 @@ export default class HintList extends Vue {
           this.poi.id,
           new Hint(this.description)
         );
-        this.description = "";
+        if(res != null) this.description = "";
         this.updateHints();
       } catch (e) {
         console.log(e);

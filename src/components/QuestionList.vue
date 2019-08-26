@@ -64,7 +64,7 @@ export default class QuestionList extends Vue {
         this.poi.id,
         new Question(this.content)
       );
-      this.content = "";
+      if(res != null) this.content = "";
       this.updateQuestions();
     }
   }

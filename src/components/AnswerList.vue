@@ -68,12 +68,12 @@ export default class AnswerList extends Vue {
       this.content != null &&
       this.content != ""
     ) {
-      let res = AnswerRepository.postOne(
+      let res = await AnswerRepository.postOne(
         this.question.poi.id,
         this.question.id,
         new Answer(this.content, this.isCorrect)
       );
-      this.content = "";
+      if(res != null) this.content = "";
       this.updateAnswers();
     }
   }

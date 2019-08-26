@@ -6,7 +6,10 @@ import UserModule from '@/UserModule';
 class AnswerRepository {
   async getOne(poiId: number, questionId: number, id: number): Promise<Answer | null> {
     try {
-      return await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/" + id, "GET");
+      let response = await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/" + id, "GET");
+      if ('id' in response) {
+        return response;
+      } else throw new Error("Invalid response");
     } catch (e) {
       console.log(e);
       return null;
@@ -20,18 +23,24 @@ class AnswerRepository {
       return null;
     }
   }
-  async postOne(poiId: number, questionId: number, answer: Answer) {
+  async postOne(poiId: number, questionId: number, answer: Answer): Promise<Answer | null> {
     try {
-      return await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/", "POST", answer);
+      let response = await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/", "POST", answer);
+      if ('id' in response) {
+        return response;
+      } else throw new Error("Invalid response");
     } catch (e) {
       console.log(e);
       return null;
     }
   }
-  async putOne(poiId: number, questionId: number, answer: Answer) {
+  async putOne(poiId: number, questionId: number, answer: Answer): Promise<Answer | null> {
     try {
       let editedAnswer = new Answer(answer.content, answer.isCorrect, answer.id);
-      return await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/" + answer.id, "PUT", editedAnswer);
+      let response = await this.fetchJSON("/api/pois/" + poiId + "/questions/" + questionId + "/answers/" + answer.id, "PUT", editedAnswer);
+      if ('id' in response) {
+        return response;
+      } else throw new Error("Invalid response");
     } catch (e) {
       console.log(e);
       return null;
