@@ -1,18 +1,11 @@
 <template>
   <div class="pois">
-    <h1>Usuarios registrados</h1>
-    <div class="listUsers flex">
-      <table class="table">
-        <thead>
-          <td>ID</td>
-          <td>Nombre de usuario</td>
-        </thead>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{user.id}}</td>
-          <td>{{user.username}}</td>
-        </tr>
-      </table>
-    </div>
+    <v-list>
+        <v-list-item v-for="user in users" :key="user.id">
+          <div class="px-2"><h3>{{user.id}}</h3></div>
+          <div class="px-2"><h2>{{user.username}}</h2></div>
+        </v-list-item>
+    </v-list>
   </div>
 </template>
 <script lang="ts">
@@ -50,47 +43,4 @@ export default class Users extends Vue {
 }
 </script>
 <style scoped lang="scss">
-.table {
-  border-spacing: 0;
-  thead{
-    font-weight: bold;
-
-  }
-  tr {
-    &:nth-child(even) {
-      background: #f8f8f8;
-    }
-  }
-  td {
-    text-align: left;
-    padding: 5px;
-  }
-}
-.flex {
-  display: flex;
-  flex-direction: row;
-  &.row {
-    flex-direction: row;
-  }
-  &.column {
-    flex-direction: column;
-  }
-  justify-content: center;
-}
-.ctrl {
-  width: 250px;
-  display: flex;
-  flex-basis: 100%;
-  justify-content: space-between;
-  &.right {
-    justify-content: flex-end;
-  }
-  &.left {
-    justify-content: flex-start;
-  }
-  input {
-    margin: 0 5px;
-  }
-  margin: 10px auto;
-}
 </style>

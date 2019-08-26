@@ -1,14 +1,17 @@
 <template>
-<div id="app">
-  <Navbar id="nav"/>
+<v-app>
+  <Navbar/>
+  <v-content id="app">
       <router-view/>
-      </div>
+  </v-content>
+</v-app>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import UserModule from "./UserModule";
 import Navbar from "./components/Navbar.vue"
+import "vuetify/dist/vuetify.css";
 
 @Component({
   components: {
@@ -17,25 +20,16 @@ import Navbar from "./components/Navbar.vue"
 })
 export default class App extends Vue {
   private drawerVisible: boolean = false;
-  get logged(): boolean {
-    return UserModule.logged;
-  }
-  logout(): void {
-    UserModule.logout();
-    if (this.$router.currentRoute.name == "home") {
-      this.$router.go(0);
-    } else {
-      this.$router.push("/home");
-    }
-  }
 }
 </script>
 <style lang="scss">
+body {
+  overscroll-behavior: contain;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 #nav {
@@ -48,5 +42,8 @@ export default class App extends Vue {
       color: #42b983;
     }
   }
+}
+.v-list-item--active .v-icon {
+    color: #444;
 }
 </style>

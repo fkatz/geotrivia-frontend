@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>Iniciar Sesión</h1>
     <LoginForm></LoginForm>
-  </div>
 </template>
 
 <script lang="ts">

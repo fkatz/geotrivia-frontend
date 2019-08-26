@@ -1,4 +1,5 @@
 import Hint from './Hint';
+import Question from './Question';
 
 export default class POI{
     id?: number;
@@ -6,6 +7,7 @@ export default class POI{
     lat: number;
     lng: number;
     hints:Hint[] = [];
+    questions:Question[] = [];
     constructor(name:string,lat:number,lng:number,id?:number){
         this.name = name;
         this.lat = lat;

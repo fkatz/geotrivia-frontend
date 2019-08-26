@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>Registrarse</h1>
     <RegisterForm></RegisterForm>
-  </div>
 </template>
 
 <script lang="ts">
