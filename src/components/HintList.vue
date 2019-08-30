@@ -6,9 +6,9 @@
         outlined
         hide-details
         label="Pista"
-        name="description"
+        name="content"
         type="text"
-        v-model="description"
+        v-model="content"
       />
       <v-btn elevation="0" small fab dark color="accent" @click="send()">
         <v-icon dark>add</v-icon>
@@ -20,7 +20,7 @@
         :key="hint.id"
         class="header title"
         @click="showHintDialog(hint)"
-      >{{hint.description}}</v-list-item>
+      >{{hint.content}}</v-list-item>
     </v-list>
     <v-dialog class="dialog" v-model="dialog" max-width="390">
       <HintForm :poi="poi" :hint="currentHint" @close="dialog=false" @update="updateHints()" />
@@ -39,7 +39,7 @@ import HintForm from "./HintForm.vue";
   components: { HintForm }
 })
 export default class HintList extends Vue {
-  public description: string = "";
+  public content: string = "";
   currentHint: Hint | null = null;
   dialog: boolean = false;
   @Prop() public poi?: POI;
@@ -51,15 +51,15 @@ export default class HintList extends Vue {
     if (
       this.poi != undefined &&
       this.poi.id != undefined &&
-      this.description != null &&
-      this.description != ""
+      this.content != null &&
+      this.content != ""
     ) {
       try {
         let res = HintRepository.postOne(
           this.poi.id,
-          new Hint(this.description)
+          new Hint(this.content)
         );
-        if(res != null) this.description = "";
+        if(res != null) this.content = "";
         this.updateHints();
       } catch (e) {
         console.log(e);

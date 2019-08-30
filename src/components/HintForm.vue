@@ -8,10 +8,10 @@
           outlined
           hide-details
           label="Pista"
-          name="description"
+          name="content"
           type="text"
           class="my-3"
-          v-model="hint.description"
+          v-model="hint.content"
         />
       </v-card-text>
       <v-card-actions>

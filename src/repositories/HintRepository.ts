@@ -32,7 +32,7 @@ class HintRepository {
   }
   async putOne(poiId: number, hint: Hint): Promise<Hint | null> {
     try {
-      let editedHint = new Hint(hint.description, hint.id);
+      let editedHint = new Hint(hint.content, hint.id);
       let response = await this.fetchJSON("/api/pois/" + poiId + "/hints/" + hint.id, "PUT", editedHint);
       if ('id' in response) {
         return response;

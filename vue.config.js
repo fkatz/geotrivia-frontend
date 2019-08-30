@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: "https://geotrivia.kosmov.space",
+        target: "http://localhost:8080",
         pathRewrite: {
           '^/api/': '/api/'
         },
